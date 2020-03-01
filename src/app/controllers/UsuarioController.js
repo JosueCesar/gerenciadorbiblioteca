@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+const bcrypt = require('bcryptjs');
 
 class UsuarioController {
 
@@ -12,6 +13,48 @@ class UsuarioController {
 
     const { id, nome, email } = await Usuario.create(req.body);
     return res.status(201).json({ id, nome, email });
+  }
+
+  async index(req, res){
+
+    const users = await Usuario.findAll();
+
+    return res.status(200).json(users.map(user => {
+      return { 
+        id: user.id, 
+        nome: user.nome, 
+        email: user.email,
+      }  
+    }));
+  }
+
+  async show(req, res){
+
+    const {id, nome, email} = await Usuario.findByPk(req.params.id);
+
+    return res.status(200).json({
+      id,
+      nome,
+      email
+    });
+  }
+
+  async update(){
+    //alterar usuario
+  }
+
+  async delete(req, res){
+    const user = await Usuario.destroy({ where: { id: req.params.id } });
+  
+    if(user){
+      return res.status(200).json({
+        message: "Usuario foi deletado com sucesso!"
+      });
+    }
+
+    return res.status(400).json({
+      error: "Usuário não existe"
+    });
   }
 
 }
