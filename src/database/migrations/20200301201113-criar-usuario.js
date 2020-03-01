@@ -2,29 +2,24 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('livros', {
+    return queryInterface.createTable('usuarios', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
-      titulo: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      autor: {
+      nome: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      editora: {
+      email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
-      quantidade: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+      hash: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {
@@ -34,11 +29,11 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('livros');
+    return queryInterface.dropTable('usuarios');
   }
 };
