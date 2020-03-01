@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 class UsuarioController {
 
   async store(req, res){
-
     const userExists = await Usuario.findOne({ where: { email: req.body.email } });
 
     if(userExists){
@@ -15,8 +14,7 @@ class UsuarioController {
     return res.status(201).json({ id, nome, email });
   }
 
-  async index(req, res){
-
+  async index(res){
     const users = await Usuario.findAll();
 
     return res.status(200).json(users.map(user => {
@@ -29,7 +27,6 @@ class UsuarioController {
   }
 
   async show(req, res){
-
     const {id, nome, email} = await Usuario.findByPk(req.params.id);
 
     return res.status(200).json({
@@ -39,8 +36,18 @@ class UsuarioController {
     });
   }
 
-  async update(){
-    //alterar usuario
+  async update(req, res){
+    const user = await Usuario.update(req.body, { where: { id: req.params.id } });
+
+    if(user[0]){
+      return res.status(200).json({
+        message: "Usuario atualizado com sucesso"
+      });
+    }
+
+    return res.status(400).json({
+      error: "Usuário não existe"
+    });
   }
 
   async delete(req, res){

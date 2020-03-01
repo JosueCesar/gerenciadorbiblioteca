@@ -12,6 +12,7 @@ routes.post('/usuario', UsuarioController.store);
 routes.get('/usuario', UsuarioController.index);
 routes.get('/usuario/:id', UsuarioController.show);
 routes.delete('/usuario/:id', UsuarioController.delete);
+routes.put('/usuario/:id', UsuarioController.update);
 
 
 module.exports = routes;
