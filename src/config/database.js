@@ -6,5 +6,7 @@ module.exports = {
   database: 'biblioteca',
   define: {
     timestamps: true,
+    underscored: true,
+    underscoredAll: true,
   }
 }

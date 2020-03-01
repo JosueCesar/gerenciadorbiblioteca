@@ -2,10 +2,8 @@ const {Router} = require('express');
 
 const routes = new Router();
 
-routes.get('/', (req, res) => {
-  return res.json({
-    alo: 'caraio',
-  })
-});
+const LivroController = require('./app/controllers/LivroController');
+
+routes.post('/livro', LivroController.store);
 
 module.exports = routes;
