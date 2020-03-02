@@ -18,6 +18,7 @@ routes.delete('/usuario/:id', UsuarioController.delete);
 routes.put('/usuario/:id', UsuarioController.update);
 
 // Rotas Emprestimo
-routes.post('/usuario/:usuario_id/livro/:livro_id', EmprestimoController.store);
+routes.post('/emprestimo/usuario/:usuario_id/livro/:livro_id', EmprestimoController.store);
+routes.get('/emprestimo/', EmprestimoController.index);
 
 module.exports = routes;

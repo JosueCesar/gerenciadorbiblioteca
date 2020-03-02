@@ -26,8 +26,15 @@ class Emprestimo extends Model{
   }
 
   static associate(models){
-    this.belongsTo(models.Usuario, { foreignKey: 'usuario_id', as: 'emprestimo' });
-    this.belongsTo(models.Usuario, { foreignKey: 'livro_id', as: 'livro' });
+    this.belongsTo(models.Usuario, { foreignKey: 'usuario_id', as: 'usuario' });
+    this.belongsTo(models.Livro, { foreignKey: 'livro_id', as: 'livro' });
+  }
+
+  static dateToString(date){
+    return (
+        date.getDate() + "/"
+      + date.getMonth() + "/"
+      + date.getFullYear());
   }
 }
 

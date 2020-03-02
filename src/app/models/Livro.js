@@ -13,6 +13,10 @@ class Livro extends Model {
 
     return this;
   }
+
+  static associate(models){
+    this.hasMany(models.Emprestimo, { foreignKey: 'livro_id', as: 'emprestimosa' });
+  }
 }
 
 module.exports = Livro;
