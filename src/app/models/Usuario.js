@@ -20,6 +20,10 @@ class Usuario extends Model {
 
     return this;
   }
+
+  static associate(models){
+    this.hasMany(models.Emprestimo, { foreignKey: 'usuario_id', as: 'emprestimos' });
+  }
 }
 
 module.exports = Usuario;

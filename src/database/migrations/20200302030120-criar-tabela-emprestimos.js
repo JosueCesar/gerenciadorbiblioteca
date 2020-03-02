@@ -19,6 +19,7 @@ module.exports = {
       },
       data_entrega: {
         type: Sequelize.DATE,
+        allowNull: true,
       },
       usuario_id: {
         type: Sequelize.INTEGER,

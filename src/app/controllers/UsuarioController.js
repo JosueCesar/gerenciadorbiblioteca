@@ -1,35 +1,48 @@
 const Usuario = require('../models/Usuario');
+const Emprestimos = require('../models/Emprestimo');
 const bcrypt = require('bcryptjs');
 
 class UsuarioController {
 
-  async store(req, res){
-    const userExists = await Usuario.findOne({ where: { email: req.body.email } });
-
-    if(userExists){
-      return res.status(400).json({ error: "Este email já está cadastrado!"});
-    }
-
-    const { id, nome, email } = await Usuario.create(req.body);
-    return res.status(201).json({ id, nome, email });
-  }
-
   async index(req, res){
-    const users = await Usuario.findAll();
-
+    const users = await Usuario.findAll({
+      include: {
+        association: 'emprestimos'
+      }
+    });
+  
     if(users[0]){
       return res.status(200).json(users.map(user => {
         return { 
           id: user.id, 
           nome: user.nome, 
           email: user.email,
+          emprestimos: user.emprestimos.map(emprestimo => {
+            return {
+              id: emprestimo.id,
+              data_emprestimo: Date(emprestimo.data_emprestimo),
+              data_devolucao: Date(emprestimo.data_devolucao),
+              data_entrega: emprestimo.data_entrega == null ? "pendente" : Date(emprestimo.data_devolucao),
+            }
+          }),
         }  
       }));
     }
-
-    return res.status(400).json({ 
+  
+  return res.status(400).json({ 
       error: "Nenhum usuário encontrado!"
     });
+  }
+  
+  async store(req, res){
+    const userExists = await Usuario.findOne({ where: { email: req.body.email } });
+    
+    if(userExists){
+      return res.status(400).json({ error: "Este email já está cadastrado!"});
+    }
+    
+    const { id, nome, email } = await Usuario.create(req.body);
+    return res.status(201).json({ id, nome, email });
   }
 
   async show(req, res){
