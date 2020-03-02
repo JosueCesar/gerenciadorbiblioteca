@@ -14,26 +14,39 @@ class UsuarioController {
     return res.status(201).json({ id, nome, email });
   }
 
-  async index(res){
+  async index(req, res){
     const users = await Usuario.findAll();
 
-    return res.status(200).json(users.map(user => {
-      return { 
-        id: user.id, 
-        nome: user.nome, 
-        email: user.email,
-      }  
-    }));
+    if(users[0]){
+      return res.status(200).json(users.map(user => {
+        return { 
+          id: user.id, 
+          nome: user.nome, 
+          email: user.email,
+        }  
+      }));
+    }
+
+    return res.status(400).json({ 
+      error: "Nenhum usuário encontrado!"
+    });
   }
 
   async show(req, res){
-    const {id, nome, email} = await Usuario.findByPk(req.params.id);
+    try{
+      const {id, nome, email} = await Usuario.findByPk(req.params.id);
 
-    return res.status(200).json({
-      id,
-      nome,
-      email
-    });
+      return res.status(200).json({
+        id,
+        nome,
+        email
+      });
+    }
+    catch(e){
+      return res.status(400).json({
+        error: "Nenhum usuário encontrado!"
+      });
+    }
   }
 
   async update(req, res){
@@ -41,12 +54,12 @@ class UsuarioController {
 
     if(user[0]){
       return res.status(200).json({
-        message: "Usuario atualizado com sucesso"
+        message: "Usuario foi atualizado com sucesso!"
       });
     }
 
     return res.status(400).json({
-      error: "Usuário não existe"
+      error: "Usuário não encontrado"
     });
   }
 
@@ -60,7 +73,7 @@ class UsuarioController {
     }
 
     return res.status(400).json({
-      error: "Usuário não existe"
+      error: "Usuário não encontrado"
     });
   }
 
