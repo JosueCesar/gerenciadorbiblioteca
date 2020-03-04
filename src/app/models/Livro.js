@@ -15,7 +15,8 @@ class Livro extends Model {
   }
 
   static associate(models){
-    this.hasMany(models.Emprestimo, { foreignKey: 'livro_id', as: 'emprestimosa' });
+    this.hasMany(models.Emprestimo, { foreignKey: 'livro_id', as: 'emprestimos' });
+    this.hasMany(models.Reserva, { foreignKey: 'livro_id', as: 'reservas' });
   }
 }
 

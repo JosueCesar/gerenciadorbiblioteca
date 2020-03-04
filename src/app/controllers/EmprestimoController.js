@@ -59,7 +59,7 @@ class EmprestimoController {
     }
 
     if(!livro){
-      return res.status(400).json({ error: "usuário inexistente" })
+      return res.status(400).json({ error: "livro inexistente" })
     }
 
     const emprestimo = await Emprestimo.create({

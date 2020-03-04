@@ -23,6 +23,7 @@ class Usuario extends Model {
 
   static associate(models){
     this.hasMany(models.Emprestimo, { foreignKey: 'usuario_id', as: 'emprestimos' });
+    this.hasMany(models.Reserva, { foreignKey: 'usuario_id', as: 'reservas' });
   }
 }
 

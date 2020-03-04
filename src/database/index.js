@@ -5,6 +5,7 @@ const models = [
   require('../app/models/Livro'),
   require('../app/models/Usuario'),
   require('../app/models/Emprestimo'),
+  require('../app/models/Reserva'),
 ];
 
 class Database {
