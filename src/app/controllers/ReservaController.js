@@ -63,7 +63,7 @@ class ReservaController {
       return res.status(201).json(reserva);
     }
 
-    return res.status(400).json({ error: "Problems in create a new 'Reserva'" })
+    return res.status(400).json({ error: "Problems on create a new 'Reserva'" })
   }
 
   async show(req, res){
@@ -101,10 +101,24 @@ class ReservaController {
   }
 
   async update(req, res){
+    const reserva = await Reserva.update(req.body, { where: { id: req.params.id }});
+
+    if(!reserva[0]){
+      return res.status(404).send();
+    }
+
+    return res.status(200).json({ message: "Updated Successfully!" });
   }
 
-  async delete(){
+  async delete(req, res){
 
+    const reserva = await Reserva.destroy({ where: { id: req.params.id } });
+
+    if(!reserva){
+      return res.status(404).json({ error: "'Reserva' was not found" });
+    }
+
+    return res.status(200).json({ message: "was successfully deleted" });
   }
 
 }
