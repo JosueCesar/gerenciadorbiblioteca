@@ -37,7 +37,10 @@
 ### Utilização
 
 Na api existem algumas rotas para serem utilizadas:
+
 ```
+Use como base o endereço 'http://localhost:3000/'
+
 // Rotas Livro
 routes.post('/livro', LivroController.store);
 routes.get('/livro', LivroController.index);
