@@ -18,9 +18,9 @@
   ```
   src/config/database.js
   ```
-Após a configuração do seu banco, acesse seu gerênciador de banco de dados e crie um banco de dados com o nome "fastfeet".
+  - Acesse seu gerênciador de banco de dados e crie um banco de dados com o nome "biblioteca".
 
-Agora, você deverá fazer as migrations das configurações das tabelas para seu banco, com o terminal execute os comandos:
+  - Agora, você deverá fazer as migrations das configurações das tabelas para seu banco, com o terminal execute os comandos:
 
   ```
   yarn sequelize db:migrate
@@ -28,7 +28,7 @@ Agora, você deverá fazer as migrations das configurações das tabelas para se
 
 ### Iniciando a aplicação
 
-Após a instalação de todas as dependências e fazer as migrations, para iniciar a aplicação, basta utilizar o comando em seu terminal: 
+  - Após a instalação de todas as dependências e fazer as migrations, para iniciar a aplicação, basta utilizar o comando em seu terminal: 
 
   ```
   yarn dev
